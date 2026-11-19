@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>How to Recycle</title>
+
+    <style>
+        /* 1. 基本設定 */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, "Noto Sans TC", sans-serif;
+            background-color: #e5e6e3;
+            color: #26352d;
+        }
+
+        /* 2. 標題 */
+        header {
+            padding: 10px 20px;
+            text-align: center;
+            background-color: rgb(250, 250, 250);
+            border-bottom: 1px solid #e4e9e1;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #387653;
+        }
+
+        header p {
+            margin: 8px 0 0;
+            color: #66736a;
+            font-size: 14px;
+        }
+
+        /* 3. 主要區域 */
+        main {
+            width: min(100% - 32px, 560px);
+            margin: 32px auto;
+        }
+
+        .card {
+            padding: 24px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 18px #243a2910;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            font-size: 21px;
+        }
+
+        .description {
+            color: #66736a;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+        /* 4. 照片預覽 */
+        .preview {
+            min-height: 220px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 2px dashed #cbd7c9;
+            border-radius: 16px;
+            background-color: #f8faf6;
+            text-align: center;
+        }
+
+        .preview img {
+            display: block;
+            width: 100%;
+            max-height: 360px;
+            object-fit: contain;
+        }
+
+        .placeholder {
+            padding: 24px;
+            color: #829084;
+            line-height: 1.8;
+        }
+
+        .camera-icon {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 42px;
+        }
+
+        /* 5. 按鈕 */
+        .button {
+            display: block;
+            width: 100%;
+            padding: 14px 18px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .button-primary {
+            background-color: #579371;
+            color: white;
+        }
+
+        .button-primary:hover {
+            background-color: #285b3d;
+        }
+
+        .button-secondary {
+            margin-top: 12px;
+            border: 1px solid #387653;
+            background-color: white;
+            color: #387653;
+        }
+
+        .button-secondary:hover {
+            background-color: #f0f6ef;
+        }
+
+        .button:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        /* 6. 辨識結果 */
+        .result {
+            margin-top: 20px;
+            padding: 16px;
+            border-radius: 12px;
+            background-color: #f0f6ef;
+            line-height: 1.8;
+        }
+
+        .result h3 {
+            margin: 0 0 8px;
+            font-size: 17px;
+        }
+
+        .result p {
+            margin: 5px 0;
+            font-size: 14px;
+            white-space: pre-line;
+        }
+
+        .warning {
+            background-color: #fff5df;
+        }
+
+
+        /* 辨識結果的文字標籤 */
+        .result-label {
+            font-weight: 700;
+        }
+
+        /* 回收材質的醒目標示 */
+        .material-tag {
+            display: inline-block;
+            padding: 2px 9px;
+            border-radius: 6px;
+            background-color: #7ba18c;
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        /* 一般垃圾的醒目標示 */
+        .general-tag {
+            display: inline-block;
+            padding: 2px 9px;
+            border-radius: 6px;
+            background-color: #a66a3f;
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+
+        /* 7. 回報表單 */
+        .report-form {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #cbd7c9;
+            border-radius: 16px;
+            background-color: #f8faf6;
+        }
+
+        .report-form h3 {
+            margin-top: 0;
+        }
+
+        .field {
+            margin-top: 16px;
+        }
+
+        .field label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .field select,
+        .field textarea {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd7c9;
+            border-radius: 10px;
+            background-color: white;
+            color: #26352d;
+            font: inherit;
+        }
+
+        .field textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* 8. 頁尾 */
+        footer {
+            padding: 20px;
+            text-align: center;
+            color: #829084;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>How to Recycle</h1>
+        <p>A Waste Sorting Assistant</p>
+    </header>
+
+    <main>
+        <section class="card">
+
+            <h2>What Can I Do About This Garbage?</h2>
+
+            <p class="description">
+                Take a picture of your waste to find out
+                how and where to dispose of it.
+            </p>
+
+            <!-- 上傳照片 -->
+            <input type="file" id="imageInput" accept="image/*" capture="environment" hidden>
+
+            <!-- 照片預覽 -->
+            <div class="preview">
+                <div class="placeholder" id="placeholder">
+                    <span class="camera-icon">📷</span>
+                    Please upload or take a photo.
+                </div>
+
+                <img id="previewImage" class="hidden" alt="">
+            </div>
+
+            <button type="button" class="button button-primary" id="chooseButton">
+                Upload / take a photo
+            </button>
+
+            <button type="button" class="button button-secondary" id="identifyButton" disabled>
+                Identify
+            </button>
+
+            <!-- AI 辨識結果 -->
+            <div id="result" class="result hidden" role="status" aria-live="polite"></div>
+
+            <!-- 辨識完成後才出現 -->
+            <div id="resultActions" class="hidden">
+
+                <!-- 手動修正 -->
+                <div class="field">
+                    <label for="correctItem">
+                        Is the identification incorrect?
+                    </label>
+
+                    <select id="correctItem">
+                        <option value="">
+                            Choose the correct item
+                        </option>
+                        <option value="plastic bottles">
+                            Plastic bottles
+                        </option>
+                        <option value="cans">
+                            Cans
+                        </option>
+                        <option value="paper containers">
+                            Paper containers
+                        </option>
+                        <option value="paper sheets">
+                            Paper sheets
+                        </option>
+                        <option value="used tissues">
+                            Used tissues
+                        </option>
+                        <option value="other">
+                            Other / Not listed
+                        </option>
+                    </select>
+                </div>
+
+                <button type="button" class="button button-secondary" id="correctButton">
+                    Change Item
+                </button>
+
+                <!-- 回報按鈕 -->
+                <button type="button" class="button button-secondary" id="reportButton">
+                    Report an Error
+                </button>
+
+            </div>
+
+            <!-- 展開式回報表單 -->
+            <div id="reportForm" class="report-form hidden">
+
+                <h3>Report an Error</h3>
+
+                <p class="description">
+                    Please select the correct waste category.
+                    Your uploaded photo and the AI result
+                    will be included in this demo report.
+                </p>
+
+                <p>
+                    <strong>AI identified:</strong>
+                    <span id="reportedPrediction">Unknown</span>
+                </p>
+
+                <div class="field">
+                    <label for="correctCategory">
+                        Correct material / category
+                    </label>
+
+                    <select id="correctCategory">
+                        <option value="">
+                            Choose the correct category
+                        </option>
+                        <option value="Plastic bottles">
+                            Plastic bottles
+                        </option>
+                        <option value="Metal cans">
+                            Metal cans
+                        </option>
+                        <option value="Paper containers">
+                            Paper containers
+                        </option>
+                        <option value="Paper sheets">
+                            Paper sheets
+                        </option>
+                        <option value="General waste">
+                            General waste
+                        </option>
+                        <option value="Other / Unknown">
+                            Other / Unknown
+                        </option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="reportComment">
+                        Additional comments (optional)
+                    </label>
+
+                    <textarea id="reportComment" placeholder="Tell us more about the problem..."></textarea>
+                </div>
+
+                <button type="button" class="button button-primary" id="submitReportButton">
+                    Submit Report
+                </button>
+
+                <button type="button" class="button button-secondary" id="cancelReportButton">
+                    Cancel
+                </button>
+
+                <p class="description">
+                    Demo version: reports are not sent or saved yet.
+                </p>
+
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        just a student project for demonstrating
+    </footer>
+
+    <!-- Teachable Machine AI 函式庫 -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.5/dist/teachablemachine-image.min.js"></script>
+
+    <script>
+        // ==========================================
+        // 1. 取得 HTML 元素
+        // ==========================================
+
+        const imageInput = document.getElementById("imageInput");
+        const chooseButton = document.getElementById("chooseButton");
+        const identifyButton = document.getElementById("identifyButton");
+        const previewImage = document.getElementById("previewImage");
+        const placeholder = document.getElementById("placeholder");
+
+        const result = document.getElementById("result");
+        const resultActions = document.getElementById("resultActions");
+
+        const correctItem = document.getElementById("correctItem");
+        const correctButton = document.getElementById("correctButton");
+
+        const reportButton = document.getElementById("reportButton");
+        const reportForm = document.getElementById("reportForm");
+        const reportedPrediction =
+            document.getElementById("reportedPrediction");
+        const correctCategory =
+            document.getElementById("correctCategory");
+        const reportComment =
+            document.getElementById("reportComment");
+        const submitReportButton =
+            document.getElementById("submitReportButton");
+        const cancelReportButton =
+            document.getElementById("cancelReportButton");
+
+        // ==========================================
+        // 2. AI 模型設定
+        // ==========================================
+
+        const MODEL_URL =
+            "https://teachablemachine.withgoogle.com/models/t8xmNYy2-/";
+
+        const SCORE_THRESHOLD = 0.75;
+
+        let model = null;
+        let currentPrediction = "";
+        let currentImageURL = null;
+
+        // ==========================================
+        // 3. 垃圾分類資料庫
+        // ==========================================
+
+        const wasteData = {
+            "plastic bottles": {
+                category: "Recycling - Plastic",
+                instructions:
+                    "\n 1. Empty the bottle, and rinse simply.\n" +
+                    "2. Compress the volume of the bottle\n" +
+                    "3. Attach the bottle cap back for recycling."
+            },
+
+            "cans": {
+                category: "Recycling - Metal",
+                instructions:
+                    "If it is a metal can, empty it before recycling."
+            },
+
+
+            "paper containers": {
+                category: "Recycling - Paper Containers",
+                instructions:
+                    "\n 1. Empty the container.\n" +
+                    "2. Separate different materials and recycle them accordingly.\n" +
+                    "3. Compress the container to reduce its volume.\n" +
+                    "notice: if the container is too dirty, please just throw it into the general waste bin"
+            },
+
+
+            "paper sheets": {
+                category: "Recycling - Paper",
+                instructions:
+                    "Keep recyclable paper clean and dry."
+            },
+
+            "used tissue": {
+                category: "General Waste",
+                instructions:
+                    "Dispose of used tissues as general waste."
+            }
+        };
+
+        // ==========================================
+        // 4. 上傳與預覽照片
+        // ==========================================
+
+        chooseButton.addEventListener("click", function () {
+            imageInput.click();
+        });
+
+        imageInput.addEventListener("change", function () {
+            const file = imageInput.files[0];
+
+            if (!file) {
+                return;
+            }
+
+            if (currentImageURL) {
+                URL.revokeObjectURL(currentImageURL);
+            }
+
+            currentImageURL = URL.createObjectURL(file);
+
+            previewImage.src = currentImageURL;
+            previewImage.classList.remove("hidden");
+            placeholder.classList.add("hidden");
+
+            identifyButton.disabled = false;
+
+            // 換照片後，清除舊結果
+            result.classList.add("hidden");
+            resultActions.classList.add("hidden");
+            reportForm.classList.add("hidden");
+
+            correctItem.value = "";
+            correctCategory.value = "";
+            reportComment.value = "";
+            currentPrediction = "";
+        });
+
+        // ==========================================
+        // 5. 顯示分類結果
+        // ==========================================
+
+
+        function displayResult(itemName, score = null) {
+
+            const key = itemName.trim().toLowerCase();
+            const data = wasteData[key];
+
+            // 清除上一次的辨識結果
+            result.replaceChildren();
+
+            const heading = document.createElement("h3");
+
+            // 如果找不到對應的垃圾分類
+            if (!data) {
+                heading.textContent = "Unknown Item";
+
+                const message = document.createElement("p");
+                message.textContent =
+                    "Please check the material and local recycling rules.";
+
+                result.append(heading, message);
+                result.classList.add("warning");
+                result.classList.remove("hidden");
+                return;
+            }
+
+            heading.textContent = "Identification Result";
+            result.appendChild(heading);
+
+            // 建立一行有粗體標題的文字
+            function createResultLine(labelText, valueText) {
+
+                const paragraph = document.createElement("p");
+
+                const label = document.createElement("strong");
+                label.className = "result-label";
+                label.textContent = labelText + ": ";
+
+                const value = document.createElement("span");
+                value.textContent = valueText;
+
+                paragraph.append(label, value);
+
+                return paragraph;
+            }
+
+            // Item
+            const item = createResultLine("Item", itemName);
+            result.appendChild(item);
+
+            // Category
+            const category = document.createElement("p");
+
+            const categoryLabel = document.createElement("strong");
+            categoryLabel.className = "result-label";
+            categoryLabel.textContent = "Category: ";
+
+            category.appendChild(categoryLabel);
+
+            if (data.category.startsWith("Recycling - ")) {
+
+                // 取出 Recycling 後面的材質名稱
+                const material = data.category.replace(
+                    "Recycling - ",
+                    ""
+                );
+
+                const recyclingText = document.createElement("span");
+                recyclingText.textContent = "Recycling - ";
+
+                const materialTag = document.createElement("span");
+                materialTag.className = "material-tag";
+                materialTag.textContent = material;
+
+                category.append(recyclingText, materialTag);
+
+            } else {
+
+                // 例如 General Waste
+                const generalTag = document.createElement("span");
+                generalTag.className = "general-tag";
+                generalTag.textContent = data.category;
+
+                category.appendChild(generalTag);
+            }
+
+            result.appendChild(category);
+
+            // Instructions
+            const instructions = createResultLine(
+                "Instructions",
+                data.instructions
+            );
+
+            result.appendChild(instructions);
+
+            // Model score（只有 AI 辨識時才顯示）
+            if (score !== null) {
+
+                const scoreLine = createResultLine(
+                    "Model score",
+                    (score * 100).toFixed(1) + "%"
+                );
+
+                result.appendChild(scoreLine);
+            }
+
+            // 顯示結果
+            result.classList.remove("warning");
+            result.classList.remove("hidden");
+        }
+
+
+        // ==========================================
+        // 6. AI 辨識照片
+        // ==========================================
+
+        identifyButton.addEventListener("click", async function () {
+            if (!previewImage.complete ||
+                previewImage.naturalWidth === 0) {
+                return;
+            }
+
+            identifyButton.disabled = true;
+            chooseButton.disabled = true;
+
+            result.classList.remove("hidden");
+            result.classList.remove("warning");
+            result.replaceChildren();
+
+            const loadingTitle = document.createElement("h3");
+            loadingTitle.textContent = "Identifying...";
+
+            const loadingText = document.createElement("p");
+            loadingText.textContent = "Please wait.";
+
+            result.append(loadingTitle, loadingText);
+
+            resultActions.classList.add("hidden");
+            reportForm.classList.add("hidden");
+
+            try {
+                if (model === null) {
+                    model = await tmImage.load(
+                        MODEL_URL + "model.json",
+                        MODEL_URL + "metadata.json"
+                    );
+                }
+
+                const predictions =
+                    await model.predict(previewImage);
+
+                predictions.sort(
+                    (a, b) => b.probability - a.probability
+                );
+
+                const best = predictions[0];
+
+                console.table(
+                    predictions.map(function (prediction) {
+                        return {
+                            Item: prediction.className,
+                            Score: (prediction.probability * 100).toFixed(2) + "%"
+                        };
+                    })
+                );
+
+                currentPrediction = best.className;
+
+                if (best.probability < SCORE_THRESHOLD) {
+                    result.replaceChildren();
+
+                    const heading = document.createElement("h3");
+                    heading.textContent = "Not Sure About This Item";
+
+                    const message = document.createElement("p");
+                    message.textContent =
+                        "The AI could not identify this item reliably. " +
+                        "Please check the material or choose an item manually.";
+
+                    result.append(heading, message);
+                    result.classList.add("warning");
+                } else {
+                    displayResult(
+                        best.className,
+                        best.probability
+                    );
+                }
+
+                // 辨識完成後才顯示修正與回報按鈕
+                resultActions.classList.remove("hidden");
+
+            } catch (error) {
+                console.error(error);
+
+                result.replaceChildren();
+
+                const heading = document.createElement("h3");
+                heading.textContent = "Identification Failed";
+
+                const message = document.createElement("p");
+                message.textContent =
+                    "Unable to identify the image. Please try again.";
+
+                result.append(heading, message);
+                result.classList.add("warning");
+
+            } finally {
+                identifyButton.disabled = false;
+                chooseButton.disabled = false;
+            }
+        });
+
+        // ==========================================
+        // 7. 手動修正辨識結果
+        // ==========================================
+
+        correctButton.addEventListener("click", function () {
+            const selectedItem = correctItem.value;
+
+            if (!selectedItem) {
+                alert("Please choose an item first.");
+                return;
+            }
+
+            displayResult(selectedItem);
+        });
+
+        // ==========================================
+        // 8. 展開或收起回報表單
+        // ==========================================
+
+        reportButton.addEventListener("click", function () {
+            reportedPrediction.textContent =
+                currentPrediction || "Unknown";
+
+            correctCategory.value = "";
+            reportComment.value = "";
+
+            reportForm.classList.toggle("hidden");
+
+            if (!reportForm.classList.contains("hidden")) {
+                reportForm.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest"
+                });
+            }
+        });
+
+        cancelReportButton.addEventListener("click", function () {
+            reportForm.classList.add("hidden");
+        });
+
+        // ==========================================
+        // 9. 模擬提交回報
+        // ==========================================
+
+        submitReportButton.addEventListener("click", function () {
+            const selectedCategory = correctCategory.value;
+
+            if (!selectedCategory) {
+                alert("Please select the correct category.");
+                return;
+            }
+
+            // 展示版：不傳送、不儲存資料
+            alert(
+                "Demo report submitted successfully!\n\n" +
+                "AI identified: " +
+                (currentPrediction || "Unknown") + "\n" +
+                "Correct category: " + selectedCategory + "\n\n" +
+                "Thank you for your feedback!\n" +
+                "(Demo only - no data was sent.)"
+            );
+
+            reportForm.classList.add("hidden");
+        });
+    </script>
+
+</body>
+
+</html>
